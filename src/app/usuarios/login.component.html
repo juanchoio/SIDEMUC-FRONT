@@ -1,0 +1,16 @@
+<div>
+    <form method="POST">
+        <input [(ngModel)]="usuario.username" type="text" name="username" 
+        id="username" placeholder="Username" required autofocus="autofocus">
+
+        <br/>
+
+        <input [(ngModel)]="usuario.password" type="password" name="password" 
+        id="password" placeholder="Password" required>
+
+        <br/>
+
+        <input (click)="login()" type="submit" value="Entrar">
+    </form>
+
+</div>

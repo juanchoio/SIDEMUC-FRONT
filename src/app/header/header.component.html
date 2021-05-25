@@ -1,0 +1,60 @@
+<div class="w-100 mb-5">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <!-- <a class="navbar-brand" href="#">{{ title }}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+    <div class="logo-app">
+      <h3 class="text-light font-weight-bold my-2 ml-4 mr-3">{{ title }}</h3>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>      
+    </div>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/deportistas">Deportistas</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/monitores">Monitores</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+            Link
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Link</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav navbar-right mr-5">
+          <li *ngIf="!authService.isAuthenticated()">
+            <a routerLink="/login" class="btn btn-outline-primary">Iniciar Sesión</a>
+          </li>
+          
+          <!-- solo se muestra cuando esta autenticado -->
+          <li *ngIf="authService.isAuthenticated()" class="dropdown mr-3">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              {{ authService.usuario.username }}
+            </a>
+          
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <button (click)="logout()" class="dropdown-item" type="submit">Cerrar Sesión</button>
+            </div>
+          </li>
+      </ul>
+
+    </div>
+  </nav>
+</div>

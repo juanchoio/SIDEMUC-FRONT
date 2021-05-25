@@ -1,0 +1,186 @@
+<div class="abrir-modal animacion fadeIn" *ngIf="modalMonitorService.modalMonitor">
+    <div class="modal" tabindex="-1" style="display: block; margin-top: 45px; height: 95%;">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{{ titulo }}</h5>
+              <button (click)="closeModalMonitor()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                  <!-- para poner aca el formulario de lOS IMPLEMENTOS Y LOS ESCENARIOS -->
+                  <!-- <deportista-categoria *ngIf="deportistaSeleccionado2" [deportista]="deportistaSeleccionado2"></deportista-categoria>    
+                  <deportista-habilidades *ngIf="deportistaSeleccionado2" [deportista]="deportistaSeleccionado2"></deportista-habilidades> -->
+
+                  <monitor-escenario *ngIf="monitorSeleccionado2" [monitor]="monitorSeleccionado2"></monitor-escenario>
+                  <monitor-implementos *ngIf="monitorSeleccionado2" [monitor]="monitorSeleccionado2"></monitor-implementos>
+                  <app-user *ngIf="monitorSeleccionado2" [monitor]="monitorSeleccionado2" [usuario]="usuarioPasado"></app-user>
+                </div>
+                <!-- *ngIf="!deportistaCategoriaService.deportista_categoria && !deportistaHabilidadesService.deportista_habilidades" -->
+                <div class="container" *ngIf="!monitorEscenarioService.monitor_escenario && !monitorImplementosService.monitor_implementos && !userService.monitor_usuario">
+                    <div class="row">
+        
+                        <!-- columna detalle monitor -->
+                        <div class="col-sm">
+        
+                            <ul *ngIf="monitor" class="list-group text-dark mb-3">
+                                <li class="list-group-item list-group-item-dark"><p class="font-weight-bold">Nro. Documento: </p>{{ monitor.numeroDocumento }}</li>
+                                <li class="list-group-item list-group-item-secondary"><p class="font-weight-bold">Nombre: </p>{{ monitor.nombrePersona | uppercase }} {{  monitor.apellidoPersona | uppercase }}</li>
+                                <li class="list-group-item"><p class="font-weight-bold">Fecha Nac. </p>{{ monitor.fechaNacimiento | date:"fullDate" }}</li>
+                                <li class="list-group-item"><p class="font-weight-bold">Edad: </p>{{ monitor.edad }} años</li>
+                                <li class="list-group-item"><p class="font-weight-bold">Dirección: </p>{{ monitor.direccion }}</li>
+                                <li class="list-group-item"><p class="font-weight-bold">Teléfono: </p>{{ monitor.telefono }}</li>
+                                <li class="list-group-item"><p class="font-weight-bold">Sexo: </p>{{ monitor.sexo }}</li>
+                                <li class="list-group-item"><p class="font-weight-bold">Email: </p>{{ monitor.correo }}</li>
+                                <li class="list-group-item"><p class="font-weight-bold">Activo: </p>{{ monitor.enabled }}</li>
+                                <li class="list-group-item"><p class="font-weight-bold">Deporte: </p>{{ monitor.deporte != null && monitor.deporte.enabled ==true? monitor.deporte.nombreDeporte: 'Sin asignar' }}</li>
+                                <!-- fecha de registro -->
+                                <li class="list-group-item"><p class="font-weight-bold">Fecha Registro: </p>{{ monitor.createAt | date:"fullDate" }}</li>
+                            </ul>
+        
+                            <div class="input-group mb-3" *ngIf="authService.hasRole('ROLE_ADMIN')">
+                                <div class="custom-file">
+                                  <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                                  <label class="custom-file-label" for="inputGroupFile04">Seleccionar foto</label>
+                                </div>
+                                <div class="input-group-append">
+                                  <button (click)="subirFoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
+                                </div>
+                            </div>
+        
+                            <div *ngIf="progreso > 0" class="progress" style="height: 30px">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progreso+'%'}">
+                                    {{ progreso }}%
+                                </div>
+                            </div>
+                              
+                        </div>
+
+                        <!-- cierra columna detalle monitor -->
+                        
+        
+                        <!-- columna foto -->
+                        <div class="col-sm">
+                            <img *ngIf="monitor?.foto" src="http://localhost:9091/v1/poli/monitores/uploads/img/{{monitor.foto}}" alt="{{monitor.foto}}" class="img-thumbnail rounded">
+                             
+                          <!-- div para el usuario               -->
+                          <div class="my-4">
+                            <div class="card">
+                              <div class="card-header">
+                                <h5>Usuario monitor</h5>
+                              </div>
+                              <div class="card-body">
+                                <div>
+                                  <button class="btn btn-dark mb-2" role="button" (click)="abrirMonitorUsuario(monitor)"
+                                      *ngIf="!usuario?.monitor else elseBlock3">Registrar Credenciales</button>
+              
+                                  <ng-template #elseBlock3>
+                                      <button class="btn btn-dark mb-2" role="button" (click)="abrirMonitorUsuario(monitor)">Editar Credenciales</button>
+                                  </ng-template>              
+                                </div>
+                                <div *ngIf="!usuario?.monitor" class="aler alert-info" role="alert">
+                                  No hay credenciales asignadas para el monitor!
+                                </div>
+                                <blockquote class="blockquote mb-0" *ngIf="usuario?.monitor">
+                                  <p>{{ usuario.username }}</p>
+                                  <footer class="blockquote-footer">Si olvidó sus credenciales, cominíquese con el administrador. 
+                                    <cite title="Source Title">Administración municipal.</cite></footer>
+                                </blockquote>
+                              </div>
+                            </div>
+                          </div>
+                        
+                        <!-- cierra div para el usuario -->
+
+
+
+                            <!-- div para el Escenario               -->
+                              <div class="my-4">
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h5>Escenario monitor</h5>
+                                  </div>
+                                  <div class="card-body">
+                                    <div>
+                                      <button class="btn btn-dark mb-2" role="button" (click)="abrirMonitorEscenario(monitor)"
+                                          *ngIf="!monitor.escenario else elseBlock4">Registrar Escenario</button>
+                  
+                                      <ng-template #elseBlock4>
+                                          <button class="btn btn-dark mb-2" role="button" (click)="abrirMonitorEscenario(monitor)">Editar Escenario</button>
+                                      </ng-template>              
+                                    </div>
+                                    <div *ngIf="!monitor.escenario" class="aler alert-info" role="alert">
+                                      No hay escenario asignado para el monitor!
+                                    </div>
+                                    <blockquote class="blockquote mb-0" *ngIf="monitor.escenario">
+                                      <p>{{ monitor.escenario.nombreEscenario }}</p>
+                                      <footer class="blockquote-footer">Monitor encargado, próximo mantenimiento: {{ monitor.escenario.fechaMantenimiento | date:"fullDate" }} 
+                                        <cite title="Source Title">Administración municipal.</cite></footer>
+                                    </blockquote>
+                                  </div>
+                                </div>
+                              </div>
+                            
+                            <!-- cierra div para el escenario -->
+    
+                            <!-- <br> -->
+    
+                            <!-- div para las habilidades -->
+                            <div class="table-responsive my-4">                       
+    
+                              <div>                            
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h5>Listado de implementos</h5>
+                                  </div>
+                                  <div class="card-body">
+                                    <div>
+                                      <button class="btn btn-dark mb-2" role="button" (click)="abrirMonitorImplementos(monitor)"
+                                          *ngIf="monitor.implementos?.length == 0 else elseBlock1">Asignar Implementos</button>
+                  
+                                      <ng-template #elseBlock1>
+                                          <button class="btn btn-dark mb-2" role="button" (click)="abrirMonitorImplementos(monitor)">Editar Implementos</button>
+                                      </ng-template>
+                                    </div>
+                                    <div *ngIf="monitor.implementos?.length == 0" class="aler alert-info" role="alert">
+                                      No hay implementos asignados para el monitor!
+                                    </div>
+                                    <blockquote class="blockquote mb-0">
+                                      
+                                      <table class="table table-bordered table-striped my-2" *ngIf="monitor.implementos?.length>0">
+                                        <thead>
+                                          <tr>
+                                            <th>Id</th>
+                                            <th>implemento</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr *ngFor="let implemento of monitor.implementos">
+                                            <td>{{ implemento.id }}</td>
+                                            <td>{{ implemento.nombreImplemento }}</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </blockquote>
+                                  </div>
+                                </div>
+    
+                              </div>
+                            </div>
+                            <!-- cierra div para las habilidades -->
+    
+                        </div> <!-- cierra div foto -->
+        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button (click)="closeModalMonitor()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    

@@ -1,0 +1,53 @@
+<div class="card border-dark mb-3">
+    <div class="card-header">{{ titulo }}</div>
+    <div class="card-body">
+
+      <!-- porner la advertencia de campo obligatorio -->
+
+        <form>
+
+          <div class="form-group row">
+            <label for="nombreImplemento" class="col-form-label col-sm-2">Nombre Implemento *</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="nombreImplemento" [(ngModel)]="implemento.nombreImplemento" >
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="cantidad" class="col-form-label col-sm-2">Cantidad *</label>
+            <div class="col-sm-6">
+              <input type="number" class="form-control" name="cantidad" [(ngModel)]="implemento.cantidad">
+            </div>
+          </div>
+
+          
+
+          <!-- <div class="form-group row">
+            <label for="enabled" class="col-form-label col-sm-2">Habilitado (default)</label>
+            <div class="form-check col-sm-2 ml-3">
+              <input class="form-check-input" type="radio" name="enabled" id="true" value="true">
+                Verdadero
+            </div>
+            <div class="form-check col-sm-2">
+              <input class="form-check-input" type="radio" name="enabled" id="false" value="false">
+                Falso
+            </div>
+          </div> -->
+
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button class="btn btn-dark" role="button" (click) = "create()" *ngIf="!implemento.id else elseBlock">Crear Implemento</button>
+              
+              <ng-template #elseBlock>
+                <button class="btn btn-dark" role="button" (click) = "update()">Editar</button>
+              </ng-template>
+              
+            </div>
+          </div>
+
+        </form>
+
+    </div>
+
+</div>

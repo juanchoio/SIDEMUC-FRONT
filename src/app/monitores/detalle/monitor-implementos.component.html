@@ -1,0 +1,84 @@
+<div *ngIf="monitorImplementosService.monitor_implementos">
+  
+
+    <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Asignar Implementos</h5>
+          <!-- en el h6 va un link -->          
+          <button type="button" class="btn btn-secondary btn-sm" (click)="cerrarMonitorImplementos()">Regresar</button>
+          
+          <form action="">
+            <div class="form-group row">     
+
+                <div class="col-sm">
+                    <div class="my-2">
+                        <p>Seleccione un implemeto de la lista desplegable</p>
+                    </div>
+                    <label for="nombreImplemento" class="col-form-label">Listado de Implementos:</label>
+                    <br>
+                    <!-- <select [compareWith]="compararCategoria" class="form-control" name="nombreCategoria" [(ngModel)]="deportista.categoria">
+                        <option [ngValue]="undefined">---Seleccionar una categoría---</option>
+                        <option *ngFor="let categoria of categorias" [ngValue]="categoria">{{ categoria.nombreCategoria }}</option>
+                    </select> -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Implemento</mat-label>
+                        <input type="text"
+                               placeholder="Añadir Implemento"
+                               aria-label="Implemento"
+                               matInput
+                               [formControl]="autocompleteControl"
+                               [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="showName" (optionSelected)="selectImplemento($event)">
+                          <mat-option *ngFor="let implemento of implementosFiltrados | async" [value]="implemento">
+                            {{ implemento.nombreImplemento }}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm table-responsive">
+
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Nombre Implemento</th>   
+                                <th>Eliminar</th>                             
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let implemento of monitor.implementos">
+                                <td>{{ implemento.id }}</td>
+                                <td>{{ implemento.nombreImplemento }}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" type="button" 
+                                    (click)="quitImplemento(implemento.id)">x</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm">
+                    <button class="btn btn-dark btn-lg btn-block" role="button" (click)="asignarImplementosMonitor()">Guardar</button>
+
+                    <!-- <ng-template #elseBlock2>
+                        <button class="btn btn-dark btn-lg btn-block" role="button" (click)="updateHabilidadesDeportista()">Editar</button>
+                    </ng-template> -->
+
+                </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+</div>

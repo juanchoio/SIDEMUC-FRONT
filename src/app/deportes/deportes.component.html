@@ -1,0 +1,47 @@
+<div class="card border-dark mb-3">
+    <div class="card-header">Deportes</div>
+    <div class="card-body text-dark">
+      <h5 class="card-title">Listado de deportes</h5>
+      
+
+      <div class="my-2 text-left">
+          <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-dark" type="button" [routerLink] = "['/deportes/form']">Crear Deporte</button>
+      </div>
+
+        <div class="table-responsive">
+            <div *ngIf="deportes?.length == 0" class="aler alert-info" role="alert">
+                No hay registros en la base de datos!
+            </div>
+            <table class="table table-bordered table-striped" *ngIf="deportes?.length>0">
+                <thead>
+                    <tr>
+                        <th *ngIf="authService.hasRole('ROLE_ADMIN')">Id</th>
+                        <th>Nombre Deporte</th>
+                        <th>Modalidad Deporte</th>
+                        <th>Activo</th>
+                        <th>Fecha Creación</th>
+                        <th *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
+                        <th *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let deporte of deportes">                        
+                        <td *ngIf="authService.hasRole('ROLE_ADMIN')">{{ deporte.id }}</td>
+                        <td>{{ deporte.nombreDeporte }}</td>
+                        <td>{{ deporte.modalidadDeporte }}</td>
+                        <td>{{ deporte.enabled }}</td>
+                        <td>{{ deporte.createAt }}</td>
+                        <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+                            <button type="button" name="editar" [routerLink] = "['/deportes/form', deporte.id]" class="btn btn-rounded btn-dark">Editar</button>
+                        </td>
+                        <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+                            <button type="button" name="eliminar" (click) = "delete(deporte)" class="btn btn-rounded btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+      
+        </div>
+      
+    </div>
+  </div>

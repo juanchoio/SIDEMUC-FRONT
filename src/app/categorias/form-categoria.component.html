@@ -1,0 +1,51 @@
+<div class="card border-dark mb-3">
+    <div class="card-header">{{ titulo }}</div>
+    <div class="card-body">
+
+      <!-- porner la advertencia de campo obligatorio -->
+
+        <form>
+
+          <div class="form-group row">
+            <label for="nombreCategoria" class="col-form-label col-sm-2">Nombre Categoría *</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="nombreCategoria" [(ngModel)]="categoria.nombreCategoria" >
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="rangoEdad" class="col-form-label col-sm-2">Rango Categoría *</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="rangoEdad" [(ngModel)]="categoria.rangoEdad">
+            </div>
+          </div>
+
+          <!-- <div class="form-group row">
+            <label for="enabled" class="col-form-label col-sm-2">Habilitado (default)</label>
+            <div class="form-check col-sm-2 ml-3">
+              <input class="form-check-input" type="radio" name="enabled" id="true" value="true">
+                Verdadero
+            </div>
+            <div class="form-check col-sm-2">
+              <input class="form-check-input" type="radio" name="enabled" id="false" value="false">
+                Falso
+            </div>
+          </div> -->
+
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button class="btn btn-dark" role="button" (click) = "create()" *ngIf="!categoria.id else elseBlock">Crear Categoría</button>
+              
+              <ng-template #elseBlock>
+                <button class="btn btn-dark" role="button" (click) = "update()">Editar</button>
+              </ng-template>
+              
+            </div>
+          </div>
+
+        </form>
+
+    </div>
+
+</div>

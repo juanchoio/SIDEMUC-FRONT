@@ -1,0 +1,51 @@
+<div class="card border-dark mb-3">
+    <div class="card-header">Escenarios</div>
+    <div class="card-body text-dark">
+      <h5 class="card-title">Listado de escenarios</h5>
+      
+
+      <div class="my-2 text-left">
+          <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-dark" type="button" [routerLink] = "['/escenarios/form']">Crear Escenario</button>
+      </div>
+
+        <div class="table-responsive">
+            <div *ngIf="escenarios?.length == 0" class="aler alert-info" role="alert">
+                No hay registros en la base de datos!
+            </div>
+            <table class="table table-bordered table-striped" *ngIf="escenarios?.length>0">
+                <thead>
+                    <tr>
+                        <th *ngIf="authService.hasRole('ROLE_ADMIN')">Id</th>
+                        <th>Nombre Escenario</th>
+                        <th>Barrio</th>
+                        <th>Observaciones</th>
+                        <th>Activo</th>
+                        <th>Fecha Mantenimiento</th>
+                        <th>Fecha Creación</th>
+                        <th *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
+                        <th *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let escenario of escenarios">                        
+                        <td *ngIf="authService.hasRole('ROLE_ADMIN')">{{ escenario.id }}</td>
+                        <td>{{ escenario.nombreEscenario }}</td>
+                        <td>{{ escenario.barrio }}</td>
+                        <td>{{ escenario.observaciones }}</td>
+                        <td>{{ escenario.enabled }}</td>
+                        <td>{{ escenario.fechaMantenimiento }}</td>
+                        <td>{{ escenario.createAt }}</td>
+                        <td  *ngIf="authService.hasRole('ROLE_ADMIN')">
+                            <button type="button" name="editar" [routerLink] = "['/escenarios/form', escenario.id]" class="btn btn-rounded btn-dark">Editar</button>
+                        </td>
+                        <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+                            <button type="button" name="eliminar" (click) = "delete(escenario)" class="btn btn-rounded btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+      
+        </div>
+      
+    </div>
+  </div>

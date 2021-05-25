@@ -1,0 +1,135 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+    <li *ngFor="let err of errores">
+        {{ err }}
+    </li>    
+</ul>
+<div class="card border-dark mb-3">
+    <div class="card-header">{{ titulo }}</div>
+    <div class="card-body">
+
+        <!-- porner la advertencia de campo obligatorio -->
+
+        <form>
+
+            <div class="form-group row">
+
+                <div class="col-sm-4">
+                    <label for="numeroDocumento" class="col-form-label">Número de Documento *</label>
+                    <input type="number" class="form-control" name="numeroDocumento"
+                        [(ngModel)]="deportista.numeroDocumento" required minlength="4" #numeroDocumento="ngModel" >
+                        <div class="alert alert-danger" *ngIf="numeroDocumento.invalid && (numeroDocumento.dirty || numeroDocumento.touched)">
+                            <div *ngIf="numeroDocumento.errors.required">
+                                El número de documento es requerido.
+                            </div>
+                            <div *ngIf="numeroDocumento.errors.minlength">
+                                El número de documento debe tener al menos cuatro dígitos.
+                            </div>
+                        </div> 
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-sm-5">
+                    <label for="nombrePersona" class="col-form-label">Nombres *</label>
+                    <input type="text" class="form-control" name="nombrePersona" [(ngModel)]="deportista.nombrePersona">
+                </div>
+                <div class="col-sm-5">
+                    <label for="apellidoPersona" class="col-form-label">Apellidos *</label>
+                    <input type="text" class="form-control" name="apellidoPersona"
+                        [(ngModel)]="deportista.apellidoPersona">
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+
+                <div class="col-sm-5">
+                    <label for="fechaNacimiento" class="col-form-label">Fecha Nac *</label>
+                    <input type="date" class="form-control" name="fechaNacimiento"
+                        [(ngModel)]="deportista.fechaNacimiento" required #fechaNacimiento="ngModel">
+                        <div class="alert alert-danger" *ngIf="fechaNacimiento.invalid && (fechaNacimiento.dirty || fechaNacimiento.touched)">
+                            <div *ngIf="fechaNacimiento.errors.required">
+                                La fecha de nacimmiento es requerida.
+                            </div>
+                        </div>
+                </div>
+                <div class="col-sm-5">
+                    <label for="direccion" class="col-form-label">Dirección *</label>
+                    <input type="text" class="form-control" name="direccion" [(ngModel)]="deportista.direccion">
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+
+                <div class="col-sm-5">
+                    <label for="telefono" class="col-form-label">Teléfono *</label>
+                    <input type="number" class="form-control" name="telefono"
+                        [(ngModel)]="deportista.telefono" required #telefono="ngModel">
+                        <div class="alert alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
+                            <div *ngIf="telefono.errors.required">
+                                El número de teléfono es requerido.
+                            </div>
+                        </div>
+                </div>
+                <div class="col-sm-3">
+                    <label for="sexo" class="col-form-label">Sexo *</label>
+                    <!-- <input type="text" class="form-control" name="direccion" [(ngModel)]="deportista.direccion"> -->
+                    <select class="form-control" name="sexo" id="" [(ngModel)]="deportista.sexo">
+                        <option value="F">Femenino</option>
+                        <option value="M">Masculino</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-5">
+                    <label for="correo" class="col-form-label">Correo electronico *</label>
+                    <input type="text" class="form-control" name="correo" [(ngModel)]="deportista.correo">
+                </div>
+
+                <div class="col-sm-5">
+                    <label for="nombreDeporte" class="col-form-label">Deporte</label>
+                    <select [compareWith]="compararDeporte" class="form-control" name="nombreDeporte" [(ngModel)]="deportista.deporte">
+                        <option [ngValue]="undefined">---Seleccionar un deporte---</option>
+                        <option *ngFor="let deporte of deportes" [ngValue]="deporte">{{ deporte.nombreDeporte }}</option>
+                    </select>
+                </div>
+                <!-- <div class="col-sm-5">
+                    <label for="apellidoPersona" class="col-form-label">Apellidos *</label>
+                    <input type="text" class="form-control" name="apellidoPersona"
+                        [(ngModel)]="deportista.apellidoPersona">
+                </div> -->
+            </div>
+
+            <!-- <div class="form-group row">
+            <label for="enabled" class="col-form-label col-sm-2">Habilitado (default)</label>
+            <div class="form-check col-sm-2 ml-3">
+              <input class="form-check-input" type="radio" name="enabled" id="true" value="true">
+                Verdadero
+            </div>
+            <div class="form-check col-sm-2">
+              <input class="form-check-input" type="radio" name="enabled" id="false" value="false">
+                Falso
+            </div>
+          </div> -->
+
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <button class="btn btn-dark" role="button" (click)="create()"
+                        *ngIf="!deportista.id else elseBlock">Crear Deportista</button>
+
+                    <ng-template #elseBlock>
+                        <button class="btn btn-dark" role="button" (click)="update()">Editar</button>
+                    </ng-template>
+
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

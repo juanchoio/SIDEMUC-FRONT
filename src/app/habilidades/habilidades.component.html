@@ -1,0 +1,45 @@
+<div class="card border-dark mb-3">
+    <div class="card-header">Habilidades</div>
+    <div class="card-body text-dark">
+      <h5 class="card-title">Listado de habilidades</h5>
+      
+
+      <div class="my-2 text-left">
+          <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-dark" type="button" [routerLink] = "['/habilidades/form']">Crear Habilidad</button>
+      </div>
+
+        <div class="table-responsive">
+            <div *ngIf="habilidades?.length == 0" class="aler alert-info" role="alert">
+                No hay registros en la base de datos!
+            </div>
+            <table class="table table-bordered table-striped" *ngIf="habilidades?.length>0">
+                <thead>
+                    <tr>
+                        <th *ngIf="authService.hasRole('ROLE_ADMIN')">Id</th>
+                        <th>Nombre Habilidad</th>
+                        <th>Activo</th>
+                        <th>Fecha Creación</th>
+                        <th *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
+                        <th *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let habilidad of habilidades">                        
+                        <td *ngIf="authService.hasRole('ROLE_ADMIN')">{{ habilidad.id }}</td>
+                        <td>{{ habilidad.nombreHabilidad }}</td>
+                        <td>{{ habilidad.enabled }}</td>
+                        <td>{{ habilidad.createAt }}</td>
+                        <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+                            <button type="button" name="editar" [routerLink] = "['/habilidades/form', habilidad.id]" class="btn btn-rounded btn-dark">Editar</button>
+                        </td>
+                        <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+                            <button type="button" name="eliminar" (click) = "delete(habilidad)" class="btn btn-rounded btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+      
+        </div>
+      
+    </div>
+  </div>

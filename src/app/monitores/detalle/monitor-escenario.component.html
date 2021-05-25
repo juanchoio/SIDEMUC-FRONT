@@ -1,0 +1,40 @@
+
+<div *ngIf="monitorEscenarioService.monitor_escenario">
+    
+    <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Asignar Escenario</h5>
+          <!-- en el h6 va un link -->          
+          <button type="button" class="btn btn-secondary btn-sm" (click)="cerrarMonitorEscenario()">Regresar</button>
+          <form action="">
+            <div class="form-group row">     
+
+                <div class="col-sm">
+                    <div class="my-2">
+                        <p>Seleccione un escenario de la lista desplegable</p>
+                    </div>
+                    <label for="nombreEscenario" class="col-form-label">Escenarios</label>
+                    <select [compareWith]="compararEscenario" class="form-control" name="nombreEscenario" [(ngModel)]="monitor.escenario">
+                        <option [ngValue]="undefined">---Seleccionar una categoría---</option>
+                        <option *ngFor="let escenario of escenarios" [ngValue]="escenario">{{ escenario.nombreEscenario }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm">
+                    <button class="btn btn-dark btn-lg btn-block" role="button" (click)="asignarEscenarioMonitor()">Guardar</button>
+
+                    <!-- <ng-template #elseBlock2>
+                        <button class="btn btn-dark btn-lg btn-block" role="button" (click)="asignarCategoriaDeportista()">Editar</button>
+                    </ng-template> -->
+
+                </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    
+</div>

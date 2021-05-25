@@ -1,0 +1,205 @@
+<div class="abrir-modal animacion fadeIn" *ngIf="modalService.modal">
+<div class="modal" tabindex="-1" style="display: block; margin-top: 45px; height: 95%;">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ titulo }}</h5>
+          <button (click)="closeModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div>
+              <!-- para poner aca el formulario de la categoria y de las habilidades -->
+              <deportista-categoria *ngIf="deportistaSeleccionado2" [deportista]="deportistaSeleccionado2"></deportista-categoria>
+
+              <deportista-habilidades *ngIf="deportistaSeleccionado2" [deportista]="deportistaSeleccionado2"></deportista-habilidades>
+            </div>
+            <div class="container" *ngIf="!deportistaCategoriaService.deportista_categoria && !deportistaHabilidadesService.deportista_habilidades">
+                <div class="row">
+    
+                    <!-- columna detalle deportista -->
+                    <div class="col-sm">
+    
+                        <ul *ngIf="deportista" class="list-group text-dark mb-3">
+                            <li class="list-group-item list-group-item-dark"><p class="font-weight-bold">Nro. Documento: </p>{{ deportista.numeroDocumento }}</li>
+                            <li class="list-group-item list-group-item-secondary"><p class="font-weight-bold">Nombre: </p>{{ deportista.nombrePersona | uppercase }} {{  deportista.apellidoPersona | uppercase }}</li>
+                            <li class="list-group-item"><p class="font-weight-bold">Fecha Nac. </p>{{ deportista.fechaNacimiento | date:"fullDate" }}</li>
+                            <li class="list-group-item"><p class="font-weight-bold">Edad: </p>{{ deportista.edad }} años</li>
+                            <li class="list-group-item"><p class="font-weight-bold">Dirección: </p>{{ deportista.direccion }}</li>
+                            <li class="list-group-item"><p class="font-weight-bold">Teléfono: </p>{{ deportista.telefono }}</li>
+                            <li class="list-group-item"><p class="font-weight-bold">Sexo: </p>{{ deportista.sexo }}</li>
+                            <li class="list-group-item"><p class="font-weight-bold">Email: </p>{{ deportista.correo }}</li>
+                            <li class="list-group-item"><p class="font-weight-bold">Activo: </p>{{ deportista.enabled }}</li>
+                            <li class="list-group-item"><p class="font-weight-bold">Deporte: </p>{{ deportista.deporte != null && deportista.deporte.enabled ==true? deportista.deporte.nombreDeporte: 'Sin asignar' }}</li>
+                            <!-- fecha de registro -->
+                            <li class="list-group-item"><p class="font-weight-bold">Fecha Registro: </p>{{ deportista.createAt | date:"fullDate" }}</li>
+                        </ul>
+    
+                        <div class="input-group mb-3" *ngIf="authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_USER')">
+                            <div class="custom-file">
+                              <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                              <label class="custom-file-label" for="inputGroupFile04">Seleccionar foto</label>
+                            </div>
+                            <div class="input-group-append">
+                              <button (click)="subirFoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
+                            </div>
+                        </div>
+    
+                        <div *ngIf="progreso > 0" class="progress" style="height: 30px">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progreso+'%'}">
+                                {{ progreso }}%
+                            </div>
+                        </div>
+                          
+                    </div>
+    
+                    <!-- columna foto -->
+                    <div class="col-sm">
+                        <img *ngIf="deportista?.foto" src="http://localhost:9091/v1/poli/deportistas/uploads/img/{{deportista.foto}}" alt="{{deportista.foto}}" class="img-thumbnail rounded">
+                         
+                        <!-- div para la categoria -->                       
+                          <div class="my-4">
+                            <div class="card">
+                              <div class="card-header">
+                                <h5>Categoría deportista</h5>
+                              </div>
+                              <div class="card-body">
+                                <div>
+                                  <button class="btn btn-dark mb-2" role="button" (click)="abrirDeportistaCategoria(deportista)"
+                                      *ngIf="!deportista.categoria else elseBlock3">Registrar categoría</button>
+              
+                                  <ng-template #elseBlock3>
+                                      <button class="btn btn-dark mb-2" role="button" (click)="abrirDeportistaCategoria(deportista)">Editar Categoría</button>
+                                  </ng-template>              
+                                </div>
+                                <div *ngIf="!deportista.categoria" class="aler alert-info" role="alert">
+                                  No hay categoría asignada para el deportista!
+                                </div>
+                                <blockquote class="blockquote mb-0" *ngIf="deportista.categoria">
+                                  <p>{{ deportista.categoria.nombreCategoria }}</p>
+                                  <footer class="blockquote-footer">De acuerdo a la edad: {{ deportista.categoria.rangoEdad }} <cite title="Source Title">Indeportes Antioquia</cite></footer>
+                                </blockquote>
+                              </div>
+                            </div>
+                          </div>
+                        
+                        <!-- cierra div para la categoria -->
+
+                        <br>
+
+                        <!-- div para las habilidades -->
+                        <div class="table-responsive my-4">                       
+
+                          <div>                            
+                            <div class="card">
+                              <div class="card-header">
+                                <h5>Listado de habilidades</h5>
+                              </div>
+                              <div class="card-body">
+                                <div>
+                                  <button class="btn btn-dark mb-2" role="button" (click)="abrirDeportistaHabilidades(deportista)"
+                                      *ngIf="deportista.habilidades?.length == 0 else elseBlock1">Asignar habilidades</button>
+              
+                                  <ng-template #elseBlock1>
+                                      <button class="btn btn-dark mb-2" role="button" (click)="abrirDeportistaHabilidades(deportista)">Editar habilidades</button>
+                                  </ng-template>
+                                </div>
+                                <div *ngIf="deportista.habilidades?.length == 0" class="aler alert-info" role="alert">
+                                  No hay habilidades asignadas para el deportista!
+                                </div>
+                                <blockquote class="blockquote mb-0">
+                                  <!-- <p>A well-known quote, contained in a blockquote element.</p>
+                                  <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
+                                  <table class="table table-bordered table-striped my-2" *ngIf="deportista.habilidades?.length>0">
+                                    <thead>
+                                      <tr>
+                                        <th>Id</th>
+                                        <th>Habilidad</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let habilidad of deportista.habilidades">
+                                        <td>{{ habilidad.id }}</td>
+                                        <td>{{ habilidad.nombreHabilidad }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </blockquote>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <!-- cierra div para las habilidades -->
+
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button (click)="closeModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="card border-dark mb-3">
+    <div class="card-header"></div>
+    <div class="card-body">
+
+        <div class="container">
+            <div class="row">
+
+                - columna detalle deportista 
+                <div class="col-sm">
+
+                    <ul *ngIf="deportista" class="list-group text-dark mb-3">
+                        <li class="list-group-item list-group-item-dark"><p class="font-weight-bold">Nro. Documento: </p>{{ deportista.numeroDocumento }}</li>
+                        <li class="list-group-item list-group-item-secondary"><p class="font-weight-bold">Nombre: </p>{{ deportista.nombrePersona}} {{  deportista.apellidoPersona | uppercase}}</li>
+                        <li class="list-group-item"><p class="font-weight-bold">Fecha Nac. </p>{{ deportista.fechaNacimiento }}</li>
+                        <li class="list-group-item"><p class="font-weight-bold">Edad: </p>{{ deportista.edad }} años</li>
+                        <li class="list-group-item"><p class="font-weight-bold">Dirección: </p>{{ deportista.direccion }}</li>
+                        <li class="list-group-item"><p class="font-weight-bold">Teléfono: </p>{{ deportista.telefono }}</li>
+                        <li class="list-group-item"><p class="font-weight-bold">Sexo: </p>{{ deportista.sexo }}</li>
+                        <li class="list-group-item"><p class="font-weight-bold">Email: </p>{{ deportista.correo }}</li>
+                        <li class="list-group-item"><p class="font-weight-bold">Activo: </p>{{ deportista.enabled }}</li>
+                        <li class="list-group-item"><p class="font-weight-bold">Deporte: </p>{{ deportista.deporte != null && deportista.deporte.enabled ==true? deportista.deporte.nombreDeporte: 'Sin asignar' }}</li>
+                        -- fecha de registro 
+                        <li class="list-group-item"><p class="font-weight-bold">Fecha Registro: </p>{{ deportista.createAt | date:"fullDate" }}</li>
+                    </ul>
+
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                          <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                          <label class="custom-file-label" for="inputGroupFile04">Seleccionar foto</label>
+                        </div>
+                        <div class="input-group-append">
+                          <button (click)="subirFoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
+                        </div>
+                    </div>
+
+                    <div *ngIf="progreso > 0" class="progress" style="height: 30px">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: progreso+'%'}">
+                            {{ progreso }}%
+                        </div>
+                    </div>
+                      
+                </div>
+
+                < columna foto 
+                <div class="col-sm">
+                    <img *ngIf="deportista?.foto" src="http://localhost:9091/v1/poli/deportistas/uploads/img/{{deportista.foto}}" alt="{{deportista.foto}}" class="img-thumbnail rounded">
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div> -->
