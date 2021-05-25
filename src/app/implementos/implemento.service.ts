@@ -33,6 +33,11 @@ export class ImplementoService {
 
   private isNoAuthorized(e): boolean{
     if(e.status == 401){//401 no autorizado, 403 prohibido 'forbidden'
+      /**preguntamos si estamos autenticados o si el token
+      * expiro el token*/
+      if(this.authService.isAuthenticated){
+        this.authService.logout();
+      }
       this.router.navigate(['/login']);
       return true;
     }
