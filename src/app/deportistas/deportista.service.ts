@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { URL_BACKEND } from '../config/config';
 import { AuthService } from '../usuarios/auth.service';
 import { Deportista } from './deportista';
 
@@ -14,7 +15,9 @@ import { Deportista } from './deportista';
 })
 export class DeportistaService {
 
-  private urlEndpoint: string = 'http://localhost:9091/v1/poli/deportistas';
+  // private urlEndpoint: string = 'http://localhost:9091/v1/poli/deportistas';
+
+  private urlEndpoint: string = URL_BACKEND + '/v1/poli/deportistas';
 
   /**httpHeaders es un objeto inmutable */
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});

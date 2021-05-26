@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { URL_BACKEND } from 'src/app/config/config';
 import { AuthService } from 'src/app/usuarios/auth.service';
 import Swal from 'sweetalert2';
 import { Role } from './role';
@@ -13,7 +14,9 @@ import { Usuario } from './usuario';
 })
 export class UsuarioService {
 
-  private urlEndpoint: string = 'http://localhost:9091/v1/poli/usuarios';
+  // private urlEndpoint: string = 'http://localhost:9091/v1/poli/usuarios';
+
+  private urlEndpoint: string = URL_BACKEND + '/v1/poli/deportistas';
 
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 

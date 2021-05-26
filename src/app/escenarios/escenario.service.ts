@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { URL_BACKEND } from '../config/config';
 import { AuthService } from '../usuarios/auth.service';
 import { Escenario } from './escenario';
 
@@ -12,7 +13,9 @@ import { Escenario } from './escenario';
 })
 export class EscenarioService {
 
-  private urlEndpoint: string = 'http://localhost:9091/v1/poli/escenarios';
+  // private urlEndpoint: string = 'http://localhost:9091/v1/poli/escenarios';
+
+  private urlEndpoint: string = URL_BACKEND + '/v1/poli/deportistas';
 
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 

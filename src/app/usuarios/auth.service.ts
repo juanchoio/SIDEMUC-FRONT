@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { URL_BACKEND } from '../config/config';
 import { Role } from '../monitores/detalle/user/role';
 import { Usuario } from '../monitores/detalle/user/usuario';
 
@@ -57,8 +58,10 @@ export class AuthService {
 
 
   login(usuario: Usuario): Observable<any>{
-    const urlEndpoint = 'http://localhost:9091/v1/poli/oauth/token';
-    
+    // const urlEndpoint = 'http://localhost:9091/v1/poli/oauth/token';
+
+    const urlEndpoint = URL_BACKEND + '/v1/poli/oauth/token';
+
     //de la aplicacion (se encriptan en base64)
     const credenciales = btoa('sidemucapp' + ':' + '12345');
 

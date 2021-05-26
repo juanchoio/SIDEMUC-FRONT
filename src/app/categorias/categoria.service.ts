@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { URL_BACKEND } from '../config/config';
 import { AuthService } from '../usuarios/auth.service';
 import { Categoria } from './categoria';
 
@@ -12,7 +13,9 @@ import { Categoria } from './categoria';
 })
 export class CategoriaService {
 
-  private urlEndpoint: string = 'http://localhost:9091/v1/poli/categorias';
+  //private urlEndpoint: string = 'http://localhost:9091/v1/poli/categorias';
+
+  private urlEndpoint: string = URL_BACKEND + '/v1/poli/categorias';
 
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 

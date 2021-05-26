@@ -7,13 +7,16 @@ import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from '../usuarios/auth.service';
 import Swal from 'sweetalert2';
+import { URL_BACKEND } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeporteService {
 
-  private urlEndpoint: string = 'http://localhost:9091/v1/poli/deportes';
+  // private urlEndpoint: string = 'http://localhost:9091/v1/poli/deportes';
+
+  private urlEndpoint: string = URL_BACKEND + '/v1/poli/deportes';
 
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 

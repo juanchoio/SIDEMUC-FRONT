@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { URL_BACKEND } from '../config/config';
 import { AuthService } from '../usuarios/auth.service';
 import { Monitor } from './monitor';
 
@@ -12,7 +13,9 @@ import { Monitor } from './monitor';
 })
 export class MonitorService {
 
-  private urlEndpoint: string = 'http://localhost:9091/v1/poli/monitores';
+  // private urlEndpoint: string = 'http://localhost:9091/v1/poli/monitores';
+
+  private urlEndpoint: string = URL_BACKEND + '/v1/poli/deportistas';
 
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 

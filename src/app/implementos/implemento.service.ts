@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { URL_BACKEND } from '../config/config';
 import { AuthService } from '../usuarios/auth.service';
 import { Implemento } from './implemento';
 
@@ -12,7 +13,9 @@ import { Implemento } from './implemento';
 })
 export class ImplementoService {
 
-  private urlEndpoint: string = 'http://localhost:9091/v1/poli/implementos';
+  // private urlEndpoint: string = 'http://localhost:9091/v1/poli/implementos';
+
+  private urlEndpoint: string = URL_BACKEND + '/v1/poli/deportistas';
 
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
