@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { URL_BACKEND } from '../config/config';
 import { AuthService } from '../usuarios/auth.service';
 import { Deportista } from './deportista';
 import { DeportistaService } from './deportista.service';
@@ -13,6 +14,8 @@ import { ModalService } from './detalle/modal.service';
   styleUrls: ['./deportistas.component.css']
 })
 export class DeportistasComponent implements OnInit {
+
+  urlBackend: string = URL_BACKEND;
 
   deportistas: Deportista[];
 

@@ -56,7 +56,7 @@
     
                     <!-- columna foto -->
                     <div class="col-sm">
-                        <img *ngIf="deportista?.foto" src="http://localhost:9091/v1/poli/deportistas/uploads/img/{{deportista.foto}}" alt="{{deportista.foto}}" class="img-thumbnail rounded">
+                        <img *ngIf="deportista?.foto" src="{{urlBackend}}/v1/poli/deportistas/uploads/img/{{deportista.foto}}" alt="{{deportista.foto}}" class="img-thumbnail rounded">
                          
                         <!-- div para la categoria -->                       
                           <div class="my-4">

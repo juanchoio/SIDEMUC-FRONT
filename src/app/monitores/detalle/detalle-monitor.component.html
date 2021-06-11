@@ -63,7 +63,7 @@
         
                         <!-- columna foto -->
                         <div class="col-sm">
-                            <img *ngIf="monitor?.foto" src="http://localhost:9091/v1/poli/monitores/uploads/img/{{monitor.foto}}" alt="{{monitor.foto}}" class="img-thumbnail rounded">
+                            <img *ngIf="monitor?.foto" src="{{urlBackend}}/v1/poli/monitores/uploads/img/{{monitor.foto}}" alt="{{monitor.foto}}" class="img-thumbnail rounded">
                              
                           <!-- div para el usuario               -->
                           <div class="my-4">

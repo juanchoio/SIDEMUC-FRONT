@@ -9,21 +9,24 @@
           <div class="form-group row">
             <label for="nombreEscenario" class="col-form-label col-sm-2">Nombre Escenario *</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" name="nombreEscenario" [(ngModel)]="escenario.nombreEscenario" >
+              <input type="text" class="form-control" name="nombreEscenario" 
+              [(ngModel)]="escenario.nombreEscenario" placeholder="Escenario">
             </div>
           </div>
 
           <div class="form-group row">
             <label for="barrio" class="col-form-label col-sm-2">Ubicación (Barrio) *</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" name="barrio" [(ngModel)]="escenario.barrio">
+              <input type="text" class="form-control" name="barrio" 
+              [(ngModel)]="escenario.barrio" placeholder="Barrio">
             </div>
           </div>
 
           <div class="form-group row">
             <label for="fechaMantenimiento" class="col-form-label col-sm-2">Fecha Mantenimiento *</label>
             <div class="col-sm-6">
-              <input type="date" class="form-control" name="fechaMantenimiento" [(ngModel)]="escenario.fechaMantenimiento">
+              <input type="date" class="form-control" name="fechaMantenimiento" 
+              [(ngModel)]="escenario.fechaMantenimiento">
             </div>
           </div>
 
@@ -31,7 +34,8 @@
             <label for="observaciones" class="col-form-label col-sm-2">Observaciones *</label>
             <div class="col-sm-6">
               <!-- <input type="text" class="form-control" name="observaciones" [(ngModel)]="escenario.observaciones"> -->
-              <textarea class="form-control" name="observaciones" id="" cols="30" rows="5"  [(ngModel)]="escenario.observaciones"></textarea>
+              <textarea class="form-control" name="observaciones" id="" cols="30" rows="5" 
+              [(ngModel)]="escenario.observaciones" placeholder="Escribe una Observación"></textarea>
             </div>
           </div>
 

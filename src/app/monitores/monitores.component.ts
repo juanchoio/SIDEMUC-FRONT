@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { URL_BACKEND } from '../config/config';
 import { AuthService } from '../usuarios/auth.service';
 import { ModalMonitorService } from './detalle/modal-monitor.service';
 import { Monitor } from './monitor';
@@ -13,6 +14,8 @@ import { MonitorService } from './monitor.service';
   styleUrls: ['./monitores.component.css']
 })
 export class MonitoresComponent implements OnInit {
+
+  urlBackend: string = URL_BACKEND;
 
   monitores: Monitor[];
 

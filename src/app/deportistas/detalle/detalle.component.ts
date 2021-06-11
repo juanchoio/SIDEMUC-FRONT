@@ -1,5 +1,6 @@
 import { HttpEventType } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { URL_BACKEND } from 'src/app/config/config';
 import { AuthService } from 'src/app/usuarios/auth.service';
 import Swal from 'sweetalert2';
 import { Deportista } from '../deportista';
@@ -18,6 +19,8 @@ export class DetalleComponent implements OnInit {
   @Input() deportista: Deportista;
 
   deportistaSeleccionado2: Deportista;
+
+  urlBackend: string = URL_BACKEND;
 
   titulo: string = 'Detalle del deportista';
 

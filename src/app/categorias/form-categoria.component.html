@@ -9,14 +9,16 @@
           <div class="form-group row">
             <label for="nombreCategoria" class="col-form-label col-sm-2">Nombre Categoría *</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" name="nombreCategoria" [(ngModel)]="categoria.nombreCategoria" >
+              <input type="text" class="form-control" name="nombreCategoria" 
+              [(ngModel)]="categoria.nombreCategoria" placeholder="Categoría">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="rangoEdad" class="col-form-label col-sm-2">Rango Categoría *</label>
+            <label for="rangoEdad" class="col-form-label col-sm-2">Rango de Edad *</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" name="rangoEdad" [(ngModel)]="categoria.rangoEdad">
+              <input type="text" class="form-control" name="rangoEdad" 
+              [(ngModel)]="categoria.rangoEdad" placeholder="Ej: 5-10 Años">
             </div>
           </div>
 

@@ -39,6 +39,7 @@
 
 .active{
     background-color: rgb(84, 84, 85);
+    font-weight: bold;
 }
 
 #sidebar-container{

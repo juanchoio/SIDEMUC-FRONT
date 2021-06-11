@@ -15,7 +15,7 @@ export class HabilidadService {
 
   // private urlEndpoint: string = 'http://localhost:9091/v1/poli/habilidades';
 
-  private urlEndpoint: string = URL_BACKEND + '/v1/poli/deportistas';
+  private urlEndpoint: string = URL_BACKEND + '/v1/poli/habilidades';
 
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 

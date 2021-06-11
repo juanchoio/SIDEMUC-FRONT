@@ -15,7 +15,7 @@ export class EscenarioService {
 
   // private urlEndpoint: string = 'http://localhost:9091/v1/poli/escenarios';
 
-  private urlEndpoint: string = URL_BACKEND + '/v1/poli/deportistas';
+  private urlEndpoint: string = URL_BACKEND + '/v1/poli/escenarios';
 
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 

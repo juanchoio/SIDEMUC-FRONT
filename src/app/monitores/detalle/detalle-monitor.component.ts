@@ -1,5 +1,6 @@
 import { HttpEventType } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { URL_BACKEND } from 'src/app/config/config';
 import { AuthService } from 'src/app/usuarios/auth.service';
 import Swal from 'sweetalert2';
 import { Monitor } from '../monitor';
@@ -26,6 +27,8 @@ export class DetalleMonitorComponent implements OnInit, OnChanges {
   usuario: Usuario;
 
   usuarioPasado: Usuario;
+
+  urlBackend: string = URL_BACKEND;
 
   titulo: string = 'Detalle del Monitor';
 

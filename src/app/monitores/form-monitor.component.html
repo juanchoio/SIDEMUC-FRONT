@@ -16,7 +16,8 @@
                 <div class="col-sm-4">
                     <label for="numeroDocumento" class="col-form-label">Número de Documento *</label>
                     <input type="number" class="form-control" name="numeroDocumento"
-                        [(ngModel)]="monitor.numeroDocumento" required minlength="4" #numeroDocumento="ngModel" >
+                        [(ngModel)]="monitor.numeroDocumento" required minlength="4" 
+                        #numeroDocumento="ngModel" placeholder="Identificación">
                         <div class="alert alert-danger" *ngIf="numeroDocumento.invalid && (numeroDocumento.dirty || numeroDocumento.touched)">
                             <div *ngIf="numeroDocumento.errors.required">
                                 El número de documento es requerido.
@@ -32,12 +33,13 @@
 
                 <div class="col-sm-5">
                     <label for="nombrePersona" class="col-form-label">Nombres *</label>
-                    <input type="text" class="form-control" name="nombrePersona" [(ngModel)]="monitor.nombrePersona">
+                    <input type="text" class="form-control" name="nombrePersona" 
+                    [(ngModel)]="monitor.nombrePersona" placeholder="Nombres">
                 </div>
                 <div class="col-sm-5">
                     <label for="apellidoPersona" class="col-form-label">Apellidos *</label>
                     <input type="text" class="form-control" name="apellidoPersona"
-                        [(ngModel)]="monitor.apellidoPersona">
+                        [(ngModel)]="monitor.apellidoPersona" placeholder="Apellidos">
                 </div>
             </div>
 
@@ -56,7 +58,8 @@
                 </div>
                 <div class="col-sm-5">
                     <label for="direccion" class="col-form-label">Dirección *</label>
-                    <input type="text" class="form-control" name="direccion" [(ngModel)]="monitor.direccion">
+                    <input type="text" class="form-control" name="direccion" 
+                    [(ngModel)]="monitor.direccion" placeholder="Ej: Kr 12 # 34 - 56">
                 </div>
             </div>
 
@@ -66,7 +69,8 @@
                 <div class="col-sm-5">
                     <label for="telefono" class="col-form-label">Teléfono *</label>
                     <input type="number" class="form-control" name="telefono"
-                        [(ngModel)]="monitor.telefono" required #telefono="ngModel">
+                        [(ngModel)]="monitor.telefono" required #telefono="ngModel"
+                        placeholder="Teléfono ó Celular">
                         <div class="alert alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
                             <div *ngIf="telefono.errors.required">
                                 El número de teléfono es requerido.
@@ -86,7 +90,8 @@
             <div class="form-group row">
                 <div class="col-sm-5">
                     <label for="correo" class="col-form-label">Correo electronico *</label>
-                    <input type="text" class="form-control" name="correo" [(ngModel)]="monitor.correo">
+                    <input type="text" class="form-control" name="correo" 
+                    [(ngModel)]="monitor.correo" placeholder="correo@ejemplo.com">
                 </div>
 
                 <div class="col-sm-5">

@@ -24,9 +24,9 @@
                         <th>Deporte</th>
                         <!-- <th>Fecha Nacimiento</th> -->
                         <!-- <th>edad</th> -->
-                        <!-- <th>Dirección</th>
+                        <!-- <th>Dirección</th>-->
                         <th>Teléfono
-                        <th>Sexo</th>
+                        <!--<th>Sexo</th>
                         <th>Activo</th>
                         <th>Fecha Creación</th> -->
                         <th *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
@@ -37,11 +37,11 @@
                     <tr *ngFor="let monitor of monitores">                        
                         <td *ngIf="authService.hasRole('ROLE_ADMIN')">                           
                             <img (click)="openModalMonitor(monitor)" *ngIf="monitor?.foto" 
-                            src="http://localhost:9091/v1/poli/monitores/uploads/img/{{monitor.foto}}" alt="{{monitor.foto}}" class="rounded my-1"
+                            src="{{urlBackend}}/v1/poli/monitores/uploads/img/{{monitor.foto}}" alt="{{monitor.foto}}" class="rounded my-1"
                             style="width: 50px; cursor: pointer;">
 
                             <img (click)="openModalMonitor(monitor)" *ngIf="!monitor?.foto" 
-                            src="http://localhost:9091/v1/poli/images/no_user.png" alt="Sin foto" class="rounded my-1"
+                            src="{{urlBackend}}/v1/poli/images/no_user.png" alt="Sin foto" class="rounded my-1"
                             style="width: 50px; cursor: pointer;">
                         </td>
                         <td>{{ monitor.numeroDocumento }}</td>
@@ -50,9 +50,9 @@
                         <td>{{ monitor.deporte != null && monitor.deporte.enabled ==true? monitor.deporte.nombreDeporte: 'Sin asignar' }}</td>
                         <!-- <td>{{ monitor.fechaNacimiento | date:"EEEE dd, MMMM yyyy" }}</td> -->
                         <!-- <td>{{ monitor.edad }}</td> -->
-                        <!-- <td>{{ monitor.direccion }}</td>
+                        <!-- <td>{{ monitor.direccion }}</td>-->
                         <td>{{ monitor.telefono }}</td>
-                        <td>{{ monitor.sexo }}</td>
+                        <!--<td>{{ monitor.sexo }}</td>
                         <td>{{ monitor.enabled }}</td>
                         <td>{{ monitor.createAt | date:"EEEE dd, MMMM yyyy" }}</td> -->
                         <td *ngIf="authService.hasRole('ROLE_ADMIN')">

@@ -16,7 +16,7 @@ export class UsuarioService {
 
   // private urlEndpoint: string = 'http://localhost:9091/v1/poli/usuarios';
 
-  private urlEndpoint: string = URL_BACKEND + '/v1/poli/deportistas';
+  private urlEndpoint: string = URL_BACKEND + '/v1/poli/usuarios';
 
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
